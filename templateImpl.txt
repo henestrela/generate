@@ -1,0 +1,28 @@
+package com.idp.#lower#.service.impl;
+
+import static com.idp.utils.Constants.GLOBAL_NOT_FOUND;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import org.springframework.transaction.annotation.Transactional;
+
+import com.idp.domain.#modulo##pascal#;
+import com.idp.foundation.impl.ServiceImpl;
+import com.idp.stepdocumentgroupgenericquestion.repository.#pascal#Repository;
+import com.idp.stepdocumentgroupgenericquestion.service.#pascal#Service;
+import com.idp.system.repository.SysDomainContentRepository;
+import com.viverebrasil.exception.BusinessUncheckedException;
+
+@Named
+@Transactional
+public class #pascal#ServiceImpl extends ServiceImpl<#modulo##pascal#, Integer> implements #pascal#Service {
+
+
+	public #pascal#ServiceImpl(#pascal#Repository repo) {
+		super(repo, );
+	}
+	
+ 
+
+}

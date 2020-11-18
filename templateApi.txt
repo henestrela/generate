@@ -1,0 +1,40 @@
+package com.idp.#lower#.api;
+
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.idp.app.configurator.api.#pascal#Api;
+import com.idp.app.configurator.api.model.#pascal#;
+import com.idp.domain.#modulo##pascal#;
+import com.idp.foundation.impl.BasicController;
+import com.idp.#lower#.service.#pascal#Service;
+
+@RestController
+public class #pascal#ApiController extends BasicController<#modulo##pascal#, Integer, #pascal#> implements #pascal#Api {
+
+    @Inject
+    public #pascal#ApiController(#pascal#Service service){
+        super(#modulo##pascal#.class, #pascal#.class, service);
+    }
+
+    @Override
+    @RequestMapping(value = "/#camel#",
+            produces = { "application/json" },
+            method = RequestMethod.GET)
+    public ResponseEntity<List<#pascal#>> find(
+            @NotNull String sort,
+            @NotNull String direction,
+            String search,
+            Integer page,
+            Integer perPage) {
+        return super.find(sort, direction, search, page, perPage);
+    }
+
+}

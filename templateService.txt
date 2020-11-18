@@ -1,0 +1,7 @@
+package com.idp.#lower#.service;
+
+import com.idp.domain.#modulo##pascal#;
+import com.idp.foundation.Service;
+
+public interface #pascal#Service extends Service<#modulo##pascal#, Integer> {
+}

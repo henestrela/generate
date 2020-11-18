@@ -1,0 +1,10 @@
+package com.idp.#lower#.repository;
+
+import com.idp.domain.#modulo##pascal#;
+import com.idp.foundation.Repository;
+
+public interface #pascal#Repository extends Repository<#modulo##pascal#,Integer> {
+
+
+
+}

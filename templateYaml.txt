@@ -1,0 +1,217 @@
+swagger: '2.0'
+info:
+  description: >
+    Testing API for MicroService
+    Main guides for API definition:
+    https://blog.accenture.com/alessandro_g_romero/2016/08/22/webapi-guidelines-for-restful-services/
+    http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api#pagination
+    https://developer.twitter.com/en/docs/accounts-and-users/create-manage-lists/api-reference/get-lists-members
+    Defines API without loading external objects (only with external identifiers). The
+    collections return all the fields for each individual in the collection,
+    including the ids for the direct relationships.
+    Reference table: #table#
+  version: 1.0.0
+  title: #api#
+  termsOfService: TBD
+  contact:
+    email: team@viverebrasil.com.br
+  license:
+    name: TBD
+    url: 'http://TBD'
+host: TBD
+basePath: /
+tags:
+  - name: #name#
+    description: #name# Definition
+    externalDocs:
+      description: TBD
+      url: 'http://TBD'
+schemes:
+  - http
+  - https
+paths:
+  /#url#:
+    get:
+      tags:
+        - #name#
+      summary: find #name#
+      description: ''
+      operationId: find
+      produces:
+        - application/json
+      parameters:
+        - name: search
+          in: query
+          description: filter search
+          required: false
+          type: string       
+        - name: page
+          in: query
+          description: page
+          required: false
+          type: integer
+          format: int32
+        - name: per_page
+          in: query
+          description: quantity of items to be return
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: Sorting criteria property
+          required: true
+          type: string
+        - name: direction
+          in: query
+          description: Direction criteria ASC or DESC
+          required: true
+          type: string
+          enum: [ ASC, DESC ]
+      responses:
+        200:
+          description: operating successfully
+          headers:
+            X-Total-Elements:
+              type: integer
+              description: Total de Companies disponiveis para navegacao.
+            X-Total-Pages:
+              type: integer
+              description: Total de paginas disponiveis par navegacao.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/#definition#'
+        404:
+          description: register not found
+      security:
+        - #auth#_auth:
+            - 'read:#readAuth#'
+    post:
+      tags:
+        - #name#
+      summary: add #name#
+      description: ''
+      operationId: addition
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: #name# a ser armazenada
+          required: true
+          schema:
+            $ref: '#/definitions/#definition#'
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: '#/definitions/#definition#'
+        400:
+          description: Invalid entry
+      security:
+        - #auth#_auth:
+            - 'write:#writeAuth#'
+            
+  /#url#/{id}:
+    get:
+      tags:
+        - #name#
+      summary: Procurar por um #name#
+      description: Retorno ao #name#
+      operationId: findById
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID (surrogate key) do #name#
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Operação realizada com sucesso
+          schema:
+            $ref: '#/definitions/#definition#'
+        '404':
+          description: #name# não encontrada
+      security:
+        - #auth#_auth:
+            - 'read:#readAuth#'
+    put:
+      tags:
+        - #name#
+      summary: altera os dados de um #name#
+      description: 'atualiza um #name# com id solicitado'
+      operationId: update
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: id for the #table#
+          required: true
+          type: integer
+          format: int32
+        - in: body
+          name: body
+          description: Conteúdo da tabela armazenada
+          required: true
+          schema:
+            $ref: '#/definitions/#definition#'
+      responses:
+        200:
+          description: operating successfully
+          schema:
+            $ref: '#/definitions/#definition#'
+        404:
+          description: register not found
+        409:
+          description: input invalid
+      security:
+        - #auth#_auth:
+            - 'write:#writeAuth#'
+    delete:
+      tags:
+        - #name#
+      summary: deletar uma #name#
+      description: ''
+      operationId: delete
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: filter search
+          required: true
+          type: integer
+          format: int32
+      responses:
+        200:
+          description: operating successfully
+          schema:
+            $ref: '#/definitions/#definition#'
+        404:
+          description: register not found
+      security:
+        - #auth#_auth:
+            - 'write:#writeAuth#'
+securityDefinitions:
+  #auth#_auth:
+    type: oauth2
+    authorizationUrl: 'http://TBD'
+    flow: implicit
+    scopes:
+      'write:#writeAuth#': modifica uma entidade #name#
+      'read:#readAuth#': le uma entidade #name#
+definitions:
+  #definition#:
+    type: object
+    properties:
+#propeties#
+externalDocs:
+  description: TBD
+  url: 'http://TBD'
